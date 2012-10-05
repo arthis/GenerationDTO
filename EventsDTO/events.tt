@@ -1,0 +1,117 @@
+﻿<#@ template language="C#" debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core, Version=4.0.0.0, Culture=neutral" #>
+<#@ Assembly Name="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral" #>
+<#@ Assembly Name="$(SolutionDir)\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll" #>
+<#@ assembly name="$(SolutionDir)GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Dynamic" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="Newtonsoft.Json" #> 
+<#@ import namespace="Newtonsoft.Json.Linq" #> 
+<#@ import namespace="GenerationDTO.Core" #> 
+
+<#+
+
+	void SaveOutput(string outputFileName)
+	{
+      string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+      string outputFilePath = Path.Combine(templateDirectory, outputFileName);
+      File.WriteAllText(outputFilePath, this.GenerationEnvironment.ToString()); 
+
+      this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+	}
+
+	void GetClasses(EventWrapper wrapper)
+    {
+		
+#>
+
+using System;
+using System.Diagnostics.Contracts;
+
+
+namespace <#= wrapper.Namespace #>{
+ 
+ 
+<#+  
+  // Insert any template procedures here
+  
+foreach (var evt in wrapper.Events)
+	{
+    var name = evt.Name;
+	var ctorArgs =string.Empty;
+	foreach (var property in evt.Properties)
+    	ctorArgs += string.Format(",{0} {1}",property.Type, property.GetCamelCasedName());#>
+	public class <#= name #>
+	{
+		public <#= name #> ()
+		{
+			//for serialisation
+		}	     
+
+		public <#= name #>(Guid id, Guid commitId, long version<#= ctorArgs #>)
+		   //: base(id,commitId,version)
+		{<#+
+	foreach (var property in evt.Properties)
+        {
+			foreach(string requirement in property.GetRequires())
+            {#>
+
+			<#= requirement #>
+
+			<#+
+            }
+        }
+	foreach (var property in evt.Properties)
+		{#>
+<#= property.GetPascalCasedName() #> = <#= property.GetCamelCasedName() #> ;
+		<#+
+        }#>
+		}	
+		<#+
+    foreach (var property in evt.Properties)
+        {#>
+	public <#= property.Type #> <#= property.GetPascalCasedName() #> { get; set;}
+	<#+
+        }
+		if(!string.IsNullOrEmpty(evt.Description))
+		{#>
+		//public override string ToDescription()
+		//{
+		//	return string.Format("<#= evt.Description #>", Id);
+		//}
+		
+		  
+        //}
+		<#+ 
+		}
+
+
+		#>
+
+		public bool Equals(DescriptionOfScenarioChanged other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return base.Equals(other)<#+ 
+			foreach(var property in evt.Properties)
+            {
+				#>
+			 && Equals(other.<#= property.GetPascalCasedName() #>, <#= property.GetPascalCasedName() #>) <#+
+            }
+			#>; 
+	}
+ <#+ } #>
+}
+<#+		
+   }
+#>

@@ -1,0 +1,25 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+void BuildHashCode(EventDTO evt)
+	{
+		#>
+
+		public override int GetHashCode()
+        {
+            unchecked
+            {
+				int result = base.GetHashCode();
+				<#+ 
+			foreach(var property in evt.Properties)
+            {
+				#>
+result = (result*397) ^ (<#= property.GetPascalCasedName() #> != null ? <#= property.GetPascalCasedName() #>.GetHashCode() : 0);
+				<#+
+            }
+			#>return result;
+            }
+        }
+<#+
+    }
+#>

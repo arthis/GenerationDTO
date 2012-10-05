@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsDTO", "EventsDTO\EventsDTO.csproj", "{FE4F2C27-C468-4285-A12A-31172A653442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSample", "EventSample\EventSample.csproj", "{856CCA5E-B7A4-401E-9880-CDF474F5932A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationDTO.Core", "GenerationDTO.Core\GenerationDTO.Core.csproj", "{BC1991FD-ADDB-4B51-9811-AE8BF4F99262}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE4F2C27-C468-4285-A12A-31172A653442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4F2C27-C468-4285-A12A-31172A653442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4F2C27-C468-4285-A12A-31172A653442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4F2C27-C468-4285-A12A-31172A653442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856CCA5E-B7A4-401E-9880-CDF474F5932A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856CCA5E-B7A4-401E-9880-CDF474F5932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856CCA5E-B7A4-401E-9880-CDF474F5932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856CCA5E-B7A4-401E-9880-CDF474F5932A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1991FD-ADDB-4B51-9811-AE8BF4F99262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1991FD-ADDB-4B51-9811-AE8BF4F99262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1991FD-ADDB-4B51-9811-AE8BF4F99262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1991FD-ADDB-4B51-9811-AE8BF4F99262}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

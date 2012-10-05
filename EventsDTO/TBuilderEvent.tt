@@ -1,0 +1,26 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #>
+
+<#@include file="$(SolutionDir)\EventsDTO\TBuilderEventProp.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TBuilderEventCtorHelper.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TBuilderEventBuilder.tt"#><#+
+void BuildEventBuilder(EventDTO evt)
+{
+
+	var name = evt.Name;
+	
+#>
+
+	public class <#= name #>Builder //: IEventBuilder<SchedulazioneAmbAddedToScenario>
+	{
+	<#+ 
+		BuildProperties(evt); 
+		BuildCtorHelper(evt); 
+		BuildBuilder(evt);
+	 #>
+	}
+<#+
+}
+	#>

@@ -1,0 +1,28 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+void BuildEquals(EventDTO evt)
+{
+	#>
+
+		public bool Equals(<#= evt.Name #> other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return base.Equals(other) <#+ 
+			foreach(var property in evt.Properties)
+            {
+				#> 	 && Equals(other.<#= property.GetPascalCasedName() #>, <#= property.GetPascalCasedName() #>) <#+
+            }
+			#>; 
+		}
+
+		public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return Equals(obj as <#= evt.Name #>);
+        }
+<#+
+}
+#>

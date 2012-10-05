@@ -1,0 +1,21 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+
+void BuildCtorHelper(EventDTO evt)
+{
+	var name = evt.Name;
+	var ctorArgs =string.Empty;
+	foreach (var property in evt.Properties)
+    {
+	#>
+
+		public <#= name #>Builder For<#= property.GetPascalCasedName() #>(<#= property.Type #> <#= property.GetCamelCasedName() #>) 
+		{
+			<#= property.GetPrivateName() #> = <#= property.GetCamelCasedName() #>;
+			return this;
+		}
+	<#+ 
+	}
+}
+#>

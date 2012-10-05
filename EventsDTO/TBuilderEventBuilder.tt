@@ -1,0 +1,32 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="$(SolutionDir)GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+void BuildBuilder(EventDTO evt)
+{
+
+	var name = evt.Name;
+	
+#>
+
+		public <#= name #> Build(Guid id, long version)
+		{
+			return Build(id, Guid.NewGuid(), version);
+		}
+
+		public <#= name #> Build(Guid id, Guid commitId, long version)
+        {
+            return new <#= name #>(id, commitId, version<#+
+	     foreach(var property in evt.Properties)
+         {	#>, <#= property.GetPrivateName() #><#+
+         }
+			 #>);
+		 }
+        
+	
+<#+
+}
+	#>

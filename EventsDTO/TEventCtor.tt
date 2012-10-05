@@ -1,0 +1,42 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+
+void BuildCtor(EventDTO evt)
+{
+	var name = evt.Name;
+	var ctorArgs =string.Empty;
+	foreach (var property in evt.Properties)
+    	ctorArgs += string.Format(",{0} {1}",property.Type, property.GetCamelCasedName());
+	#>
+
+
+		public <#= name #> ()
+		{
+			//for serialisation
+		}	     
+
+		public <#= name #>(Guid id, Guid commitId, long version<#= ctorArgs #>)
+		   //: base(id,commitId,version)
+		{
+		<#+
+	foreach (var property in evt.Properties)
+        {
+			
+			foreach(string requirement in property.GetRequires())
+            {#>
+	<#= requirement #>
+
+<#+
+            }
+        }
+
+	foreach (var property in evt.Properties)
+        {#>
+			<#= property.GetPascalCasedName() #> = <#= property.GetCamelCasedName() #> ;
+<#+         }#>
+		}
+	<#+
+}
+
+#>

@@ -1,0 +1,40 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ Assembly Name="$(SolutionDir)\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GenerationDTO.Core" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@include file="$(SolutionDir)\EventsDTO\TEvent.tt"#>
+<#+
+void BuildEvents(EventWrapper wrapper)
+{
+#>
+
+using System;
+using System.Diagnostics.Contracts;
+
+
+namespace <#= wrapper.Namespace #>
+{
+
+<#+
+	foreach (var evt in wrapper.Events)
+	{
+		BuildEvent(evt);
+    }
+
+#>
+}
+<#+
+}
+#>

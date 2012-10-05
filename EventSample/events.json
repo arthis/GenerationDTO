@@ -1,0 +1,47 @@
+﻿{
+    "Namespace" : "EventNameSpace",
+    "Events" :
+    [
+        {
+            "Name" :"doneThat",
+			"Description" : " description done that",
+            "Properties" : [
+                {
+                    "Name" : "property1ssssssssdsdsdsds",
+                    "Type" : "string",
+                },
+                {
+                    "Name" : "property2",
+                    "Type" : "string",
+					"IsRequired" : true 
+                },
+            ]
+        },
+        {
+            "Name" :"doneThatAlso",
+            "Properties" : [
+                {
+                    "Name" : "property1bis",
+                    "Type" : "string"
+                },
+                {
+                    "Name" : "property2bis",
+                    "Type" : "string"
+                },
+            ]
+        },
+        {
+            "Name" :"whatabouthisone",
+            "Properties" : [
+                {
+                    "Name" : "property1bis",
+                    "Type" : "string"
+                },
+                {
+                    "Name" : "property2bis",
+                    "Type" : "string"
+                },
+            ]
+        },
+    ]
+}

@@ -1,0 +1,37 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ Assembly Name="$(SolutionDir)\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GenerationDTO.Core" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ include file="$(SolutionDir)\EventsDTO\TBuilderEvent.tt"#>
+<#+
+void BuildBuilders(EventWrapper wrapper)
+{
+#>
+
+using System;
+using System.Diagnostics.Contracts;
+//using CommonDomain.Core.Super.Messaging.ValueObjects;
+
+
+namespace <#= wrapper.Namespace #>
+{
+
+<#+
+	foreach (var evt in wrapper.Events)
+	{
+		BuildEventBuilder(evt);
+    }
+
+#>
+}
+<#+
+}
+#>

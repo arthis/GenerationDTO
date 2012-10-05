@@ -1,0 +1,14 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #><#+
+void BuildProperties(EventDTO evt)
+	{
+	foreach (var property in evt.Properties)
+        {
+			#> 
+		private <#= property.Type #>  <#= property.GetPrivateName() #> ;<#+
+
+        }
+	}
+
+#>

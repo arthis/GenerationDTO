@@ -1,0 +1,28 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ assembly name="$(SolutionDir)\GenerationDTO.Core\bin\Debug\GenerationDTO.Core.dll" #>
+<#@ import namespace="GenerationDTO.Core" #>
+<#@include file="$(SolutionDir)\EventsDTO\TEventProp.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TEventCtor.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TEventDescription.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TEventEquals.tt"#>
+<#@include file="$(SolutionDir)\EventsDTO\TEventHashCode.tt"#><#+
+ void BuildEvent(EventDTO evt)
+{
+
+	var name = evt.Name;
+	
+#>
+
+	public class <#= name #> //:Message, IEvent
+	{
+	<#+ 
+		BuildProp(evt); 
+		BuildCtor(evt); 
+		BuildDescription(evt);
+	    BuildEquals(evt);
+		BuildHashCode(evt);
+	 #>
+	}
+<#+
+}
+	#>
